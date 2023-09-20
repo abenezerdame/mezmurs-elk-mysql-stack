@@ -112,6 +112,7 @@ services:
 networks:
   mysql-elk:
     driver: bridge
+    external: true
 
 volumes:
   mysql:
