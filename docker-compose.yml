@@ -6,12 +6,12 @@ services:
         MYSQL_VERSION: $MYSQL_VERSION
     volumes:
       - type: bind
-        source: ./mysql/config/mysql.cnf
+        source: /data/mysql/config/mysql.cnf
         target: /etc/mysql/conf.d/my.cnf
         read_only: true
       # Initialize database using SQL scripts
       - type: bind
-        source: ./mysql/sql
+        source: /data/mysql/sql
         target: /docker-entrypoint-initdb.d
         read_only: true
       # Persist data on host machine
@@ -36,7 +36,7 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - type: bind
-        source: ./elasticsearch/config/elasticsearch.yml
+        source: /data/elasticsearch/config/elasticsearch.yml
         target: /usr/share/elasticsearch/config/elasticsearch.yml
         read_only: true
       # Persist data on host machine
@@ -62,22 +62,22 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - type: bind
-        source: ./logstash/config/logstash.yml
+        source: /data/logstash/config/logstash.yml
         target: /usr/share/logstash/config/logstash.yml
         read_only: true
       # List id and config path of pipelines
       - type: bind
-        source: ./logstash/pipeline/pipelines.yml
+        source: /data/logstash/pipeline/pipelines.yml
         target: /usr/share/logstash/config/pipelines.yml
         read_only: true
       # Add configurations of pipelines
       - type: bind
-        source: ./logstash/pipeline/conf
+        source: /data/logstash/pipeline/conf
         target: /usr/share/logstash/pipeline
         read_only: true
       # Add SQL scripts used by JDBC input plugin
       - type: bind
-        source: ./logstash/pipeline/sql
+        source: /data/logstash/pipeline/sql
         target: /usr/share/logstash/sql
         read_only: true
     ports:
@@ -99,7 +99,7 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - type: bind
-        source: ./kibana/config/kibana.yml
+        source: /data/kibana/config/kibana.yml
         target: /usr/share/kibana/config/kibana.yml
         read_only: true
     ports:
